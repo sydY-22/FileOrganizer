@@ -1,9 +1,13 @@
 import os, shutil
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox
 
+BLACK_COLOR = "#2C2C2C"
 
-class FileOrganizer:
+class FileOrganizer(tk.Tk):
 
     def __init__(self):
+        super().__init__()
         self.folder_mapping = {
             "Text Files": ".txt",
             "PDFs": ".pdfs",
@@ -22,6 +26,25 @@ class FileOrganizer:
         }
 
         self.folder_path = ""
+
+        self.title("File Organizer App!")
+        self.geometry("500x450")
+        self.config(bg=BLACK_COLOR)
+
+        # title label:
+        self.label_title = tk.Label(self, text="File Organizer App!", font=("bold", 20))
+        self.label_title.pack(pady=20)
+
+        # select file path button:
+        self.select_folder_path_button = tk.Button(self, text="Select Folder Path", command=self.select_folder_path)
+        self.select_folder_path_button.pack(pady=5)
+
+    def select_folder_path(self):
+        """Select file path to organize."""
+        self.folder_path = filedialog.askdirectory(title="Select Folder Path")
+
+        if self.folder_path:
+            self.organize_files()
     
     def get_folder_path(self):
         """Gets the user folder path."""
@@ -30,7 +53,7 @@ class FileOrganizer:
     
     def organize_files(self):
         """Map the files to their specified directory."""
-        self.folder_path = self.get_folder_path()
+        # self.folder_path = self.get_folder_path()
 
         if not os.path.exists(self.folder_path):
             print(f"Error: The directory {self.folder_path} does NOT exist!")
@@ -53,6 +76,7 @@ class FileOrganizer:
                     shutil.move(item_path, os.path.join(destination_folder, file))
                     print(f"Successfully moved: {file} to {folder}")
                     break
+        messagebox.showinfo("Success!", "Files Successfully Organized!")
 
     
     def menu(self):
@@ -63,14 +87,15 @@ class FileOrganizer:
 
 def main():
     test = FileOrganizer()
+    test.mainloop()
 
-    while True:
-        test.menu()
-        prompt = input("Please select between options 1-2: ")
+    # while True:
+    #     test.menu()
+    #     prompt = input("Please select between options 1-2: ")
 
-        if prompt == '1':
-            test.organize_files()
-        else:
-            return False
+    #     if prompt == '1':
+    #         test.organize_files()
+    #     else:
+    #         return False
 
 
