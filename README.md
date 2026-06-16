@@ -3,3 +3,4 @@ This program aims to help organize needed files based on their type (extension).
 
 # Tools:
 Used python as programming language, os and shutil libraries for file handling
+![File Organizer App Demo](GIFS/file-organize-gif.gif)
