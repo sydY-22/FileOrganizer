@@ -22,7 +22,9 @@ class FileOrganizer(tk.Tk):
             "Excel": ".xlsx",
             "Word Docs": ".docx",
             "Archives": ".zip",
-            "Audio": ".wav"
+            "Audio": ".wav",
+            "SQL": ".sql",
+            "Dashboards": ".pbix"
         }
 
         self.folder_path = ""
